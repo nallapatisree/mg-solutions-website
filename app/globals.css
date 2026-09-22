@@ -1,0 +1,272 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-ink-900 antialiased;
+}
+
+/* ============================================================
+   Layout primitives
+   ============================================================ */
+
+.container-xl {
+  @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-500;
+}
+.btn-primary {
+  @apply btn bg-brand-600 text-white hover:bg-brand-700 hover:shadow-lg hover:shadow-brand-600/25 active:scale-[0.98];
+}
+.btn-outline {
+  @apply btn border border-ink-200 bg-white text-ink-800 hover:border-ink-300 hover:bg-ink-50 active:scale-[0.98];
+}
+.btn-ghost {
+  @apply btn text-ink-700 hover:bg-ink-50;
+}
+
+.card {
+  @apply rounded-2xl border border-ink-100 bg-white shadow-soft;
+}
+
+.section {
+  @apply py-16 sm:py-20;
+}
+
+.badge {
+  @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-medium;
+}
+
+.form-label {
+  @apply mb-1.5 block text-sm font-medium text-ink-700;
+}
+.form-input {
+  @apply w-full rounded-lg border border-ink-200 px-3.5 py-2.5 text-sm text-ink-900 placeholder:text-ink-400 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100;
+}
+.form-textarea {
+  @apply form-input min-h-[120px] resize-y;
+}
+
+/* ============================================================
+   Scroll reveal
+   ============================================================ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ============================================================
+   Interactive card states
+   ============================================================ */
+
+.card-lift {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
+}
+.card-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 40px -12px rgba(15, 16, 22, 0.16);
+  @apply border-brand-200;
+}
+
+/* Animated underline for "Learn More" style links */
+.link-arrow svg {
+  transition: transform 0.25s ease;
+}
+.group:hover .link-arrow svg {
+  transform: translateX(4px);
+}
+
+/* Image zoom inside a fixed frame */
+.zoom-frame {
+  overflow: hidden;
+}
+.zoom-frame > * {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.group:hover .zoom-frame > * {
+  transform: scale(1.06);
+}
+
+/* ============================================================
+   Hero mockup
+   ============================================================ */
+
+.mockup-stage {
+  perspective: 1400px;
+}
+
+.mockup-glow {
+  position: absolute;
+  inset: -12% -8% -18% -8%;
+  background: radial-gradient(60% 55% at 50% 45%, rgba(43, 92, 246, 0.22), transparent 70%);
+  filter: blur(36px);
+  z-index: -1;
+  animation: glow-pulse 7s ease-in-out infinite;
+}
+
+.mockup-float {
+  animation: device-in 1s cubic-bezier(0.16, 1, 0.3, 1) both,
+             device-float 7s ease-in-out 1s infinite;
+}
+
+.mockup-chip {
+  opacity: 0;
+  animation: chip-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.mockup-chip-1 { animation-delay: 1.0s; }
+.mockup-chip-2 { animation-delay: 1.25s; }
+.mockup-chip-3 { animation-delay: 1.45s; }
+
+/* Sequenced assembly of the mockup's inner content */
+.mk-step {
+  opacity: 0;
+  animation: mk-fade 0.55s ease-out forwards;
+}
+.mk-step-1 { animation-delay: 0.35s; }
+.mk-step-2 { animation-delay: 0.55s; }
+.mk-step-3 { animation-delay: 0.75s; }
+.mk-step-4 { animation-delay: 0.95s; }
+
+/* Chart bars grow from their baseline */
+.mk-bar {
+  transform-origin: center bottom;
+  animation: mk-grow 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.mk-bar-1 { animation-delay: 1.0s; }
+.mk-bar-2 { animation-delay: 1.1s; }
+.mk-bar-3 { animation-delay: 1.2s; }
+.mk-bar-4 { animation-delay: 1.3s; }
+.mk-bar-5 { animation-delay: 1.4s; }
+
+.mk-line {
+  stroke-dasharray: 130;
+  stroke-dashoffset: 130;
+  animation: mk-draw 1.1s ease-out 1.5s forwards;
+}
+
+.mk-progress {
+  width: 0;
+  animation: mk-progress 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1.6s forwards;
+}
+
+@keyframes device-in {
+  from { opacity: 0; transform: translateY(28px) rotateX(9deg) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) rotateX(0) scale(1); }
+}
+@keyframes device-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-9px); }
+}
+@keyframes chip-in {
+  from { opacity: 0; transform: translateY(14px) scale(0.94); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes mk-fade {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes mk-grow {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+@keyframes mk-draw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes mk-progress {
+  to { width: 98%; }
+}
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50%      { opacity: 1;    transform: scale(1.06); }
+}
+
+/* ============================================================
+   Hero background texture
+   ============================================================ */
+
+.hero-grid {
+  background-image:
+    linear-gradient(to right, rgba(43, 92, 246, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(43, 92, 246, 0.07) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 75% 60% at 50% 40%, #000 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 60% at 50% 40%, #000 40%, transparent 100%);
+}
+
+.hero-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(60px);
+  opacity: 0.5;
+  animation: orb-drift 16s ease-in-out infinite;
+}
+
+@keyframes orb-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(24px, -18px) scale(1.08); }
+  66%      { transform: translate(-18px, 14px) scale(0.95); }
+}
+
+/* ============================================================
+   Marquee
+   ============================================================ */
+
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 34s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ============================================================
+   Accessibility — honour the OS "reduce motion" setting.
+   Content still appears; it simply stops moving.
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .reveal { opacity: 1; transform: none; }
+  .mockup-chip { opacity: 1; }
+  .mk-step { opacity: 1; }
+  .mk-bar { transform: scaleY(1); }
+  .mk-line { stroke-dashoffset: 0; }
+  .mk-progress { width: 98%; }
+  .marquee-track { animation: none; }
+  .card-lift:hover { transform: none; }
+}
