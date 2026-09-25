@@ -4,6 +4,7 @@ import { requireAdmin, getContent, upsertKeyValue } from '../../../../lib/server
 import { str } from '../../../../lib/validate';
 
 export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try { requireAdmin(); } catch (res) { return res; }
